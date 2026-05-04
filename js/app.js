@@ -11,22 +11,32 @@ Játék szabályok:
 
 */
 
-var pontszamok, korPontszam, aktivJatekos, kocka;
+var pontszamok, korPontszam, aktivJatekos;
 
 pontszamok = [0, 0];
 korPontszam = 0;
 aktivJatekos = 0;
 
-Math.floor(Math.random() * 6) + 1;
 
-document.querySelector('#current-' + aktivJatekos).textContent = kocka;
+
+/* document.querySelector('#current-' + aktivJatekos).textContent = kocka; */
 
 document.querySelector('.dice').style.display = 'none';
 
-function gomb() {
-  //
-}
 
-gomb();
 
-document.querySelector('.btn-roll').addEventListener('click', gomb);
+
+document.querySelector('.btn-roll').addEventListener('click', function(){
+
+  //kell egy véletlen szám
+
+kocka = Math.floor(Math.random() * 6) + 1;
+
+// eredmény megjelenítése
+var kockaDOM = document.querySelector('.dice');
+kockaDOM.style.display = 'block';
+kockaDOM.src = 'img/dice-' + kocka + '.png';
+
+//körben elért pontszám frissítése, ha nem 1.et dobunk.
+
+});
