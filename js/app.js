@@ -27,7 +27,7 @@ document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
 document.getElementById('current-1').textContent = '0'; 
 
-
+// Dobás GOMB kezelője
 document.querySelector('.btn-roll').addEventListener('click', function(){
 
   //kell egy véletlen szám
@@ -36,9 +36,61 @@ kocka = Math.floor(Math.random() * 6) + 1;
 
 // eredmény megjelenítése
 var kockaDOM = document.querySelector('.dice');
-kockaDOM.style.display = 'block';
+kockaDOM.style.display = 'block'; 
 kockaDOM.src = 'img/dice-' + kocka + '.png';
 
 //körben elért pontszám frissítése, ha nem 1.et dobunk.
 
+if (kocka !== 1) {
+  //itt adjuk hozzám a számot az aktuális ponthoz
+  korPontszam += kocka;
+  document.querySelector('#current-' + aktivJatekos).textContent = korPontszam;
+}
+else {
+  //következő játékosra váltás
+
+  kovetkezoJatekos();
+  /* aktivJatekos === 0 ? aktivJatekos = 1 : aktivJatekos = 0;
+  korPontszam = 0;
+
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+
+  document.querySelector('.player-0-panel').classList.toggle('active');
+  document.querySelector('.player-1-panel').classList.toggle('active');
+
+  document.querySelector('.dice').style.display = 'none'; */
+     }
 });
+
+//megtartom GOMB esemény kezelője
+
+document.querySelector('.btn-hold').addEventListener('click', function() {
+  //összes pontszám frissítése a kódban
+   pontszamok[aktivJatekos] += korPontszam;
+
+  // összes pontszám frissítése a felületen (UI)
+    
+   document.querySelector('#score-' + aktivJatekos).textContent = pontszamok[aktivJatekos];
+
+   //nyert a jétékos?
+   if (pontszamok[aktivJatekos] >= 100) {
+     document.querySelector('#name-' + aktivJatekos).textContent = 'Winner!';
+   }
+
+  // nyert a játékos?
+  kovetkezoJatekos();
+});
+
+function kovetkezoJatekos() {
+  aktivJatekos === 0 ? aktivJatekos = 1 : aktivJatekos = 0;
+  korPontszam = 0;
+
+  document.getElementById('current-0').textContent = '0';
+  document.getElementById('current-1').textContent = '0';
+
+  document.querySelector('.player-0-panel').classList.toggle('active');
+  document.querySelector('.player-1-panel').classList.toggle('active');
+
+  document.querySelector('.dice').style.display = 'none';
+};
