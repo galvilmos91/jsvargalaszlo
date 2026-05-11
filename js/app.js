@@ -13,9 +13,9 @@ Játék szabályok:
 
 var pontszamok, korPontszam, aktivJatekos;
 
-pontszamok = [0, 0];
+/* pontszamok = [0, 0];
 korPontszam = 0;
-aktivJatekos = 0;
+aktivJatekos = 0; */
 
 
 
@@ -76,11 +76,16 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
    //nyert a jétékos?
    if (pontszamok[aktivJatekos] >= 100) {
      document.querySelector('#name-' + aktivJatekos).textContent = 'Winner!';
+     document.querySelector('.player' + aktivJatekos + '-panel').classList.add('winner');
+     document.querySelector('.player' + aktivJatekos + '-panel').classList.remove('active');
+        
    }
 
-  // nyert a játékos?
+  // következő játékos
   kovetkezoJatekos();
 });
+
+// következő játékos
 
 function kovetkezoJatekos() {
   aktivJatekos === 0 ? aktivJatekos = 1 : aktivJatekos = 0;
@@ -94,3 +99,19 @@ function kovetkezoJatekos() {
 
   document.querySelector('.dice').style.display = 'none';
 };
+
+// új játék indítása
+
+document.querySelector('.btn-new').addEventListener('click', function() {
+/* pontszamok[0,0];
+aktivJatekos = 0;
+korPontszam = 0; */
+
+// init
+
+function init() {
+  pontszamok = [0, 0];
+  aktivJatekos = 0;
+  korPontszam = 0;
+
+});
